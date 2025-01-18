@@ -18,6 +18,7 @@ const FoodDisplay = ({ category }) => {
                 image={item.image}
                 name={item.name}
                 price={item.price}
+                category={item.category}
               />
             );
           }

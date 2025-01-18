@@ -1,19 +1,22 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { assets } from '../../assets/frontend_assets/assets';
 import './FoodItems.css';
 import { StoreContext } from '../../Context/storeContext';
 
 const FoodItem = ({ id, name, price, description, image }) => {
-  const [foodCount, setFoodCount] = useState(0);
   const{cartItems, addToCart, removeFromCart}=useContext(StoreContext);
   return (
     <div className="food-item">
       <div className="food-item-img-container">
         <img className="food-item-image" src={image} alt={name} />
         {
-          foodCount === 0
-          ? <img className='add' onClick={() => setFoodCount(foodCount + 1)} src={assets.add_icon_white} alt="add_icon" />
-          : null // Provide an else part here
+          !cartItems[id]
+          ? <img className='add' onClick={() => addToCart(id)} src={assets.add_icon_white} alt="add_icon" />
+          :  <div className="food-item-counter">
+              <img className='minus' onClick={() => removeFromCart(id)} src={assets.remove_icon_red} alt="minus_icon" />
+              <span>{cartItems[id]}</span>
+              <img className='plus' onClick={() => addToCart(id)} src={assets.add_icon_green} alt="plus_icon" />
+            </div>
         }
       </div>
       <div className="food-item-info">
