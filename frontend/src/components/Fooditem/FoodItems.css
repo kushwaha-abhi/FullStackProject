@@ -31,8 +31,9 @@
 .food-items-rating p{
     margin-left: 2px;
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 300;
     width: auto;
+    color: black;
 }
 
 .food-items-rating img{
@@ -45,7 +46,7 @@
 }
 .food-item-price{
     font-size: 20px;
-    color: tomato;
+    color:tomato;
     margin:10px
 }
 

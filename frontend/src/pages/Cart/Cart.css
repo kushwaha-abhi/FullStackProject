@@ -1,0 +1,124 @@
+.cart-container {
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .cart-container h2 {
+    text-align: center;
+    color: tomato;
+  }
+  
+  .cart-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-weight: bold;
+    color: tomato;
+  }
+  
+  .cart-header p {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cart-item-image {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .cart-item img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+  }
+  
+  .cart-item p {
+    flex: 1;
+    text-align: center;
+    margin: 0 10px;
+    color: #333;
+  }
+  
+  .cart-item button {
+    background: tomato;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .cart-item button:hover {
+    background: darkred;
+  }
+  
+  hr {
+    border: 0;
+    height: 1px;
+    background: #ddd;
+    margin: 20px 0;
+  }
+  
+  .cart-bottom {
+    margin-top: 20px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cart-summary {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .cart-summary p {
+    margin: 0;
+    color: #333;
+  }
+  
+  .checkout-button {
+    width: 100%;
+    padding: 10px;
+    background: tomato;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .checkout-button:hover {
+    background: darkred;
+  }
+  
+  @media (max-width: 600px) {
+    .cart-header, .cart-item, .cart-summary {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .cart-header p, .cart-item p {
+      text-align: left;
+    }
+  
+    .cart-item img {
+      margin-bottom: 10px;
+    }
+  }

@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: unset;
+    z-index: 100;
 }
 
 .navbar.logo{

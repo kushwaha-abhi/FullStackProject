@@ -22,10 +22,10 @@
     width: 300px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     position: relative;
-    animation: fadeIn 0.3s ease-in-out;
+    animation: fIn 0.3s ease-in-out;
   }
   
-  @keyframes fadeIn {
+  @keyframes fIn {
     from {
       opacity: 0;
       transform: scale(0.9);
@@ -73,8 +73,8 @@
     width: 100%;
     padding: 10px;
     background: tomato;
-    color: #fff;
-    border: none;
+    color:white ;
+    border: none  ;
     border-radius: 4px;
     cursor: pointer;
     transition: background 0.3s;
@@ -91,6 +91,4 @@
     color: tomato;
   }
   
-  p:hover {
-    text-decoration: underline;
-  }
+  
