@@ -1,0 +1,61 @@
+import fs from "fs";
+import foodModel from "../models/foodModel.js"; // Ensure the correct file path
+
+const addFood = async (req, res) => {
+  const { name, description, price, countInStock , category} = req.body;
+  const image = req.file ? req.file.filename : null;
+
+  if (!name || !description || !price) {
+     
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
+  try {
+    const newFood = new foodModel({ name, description, price, image ,category, countInStock});
+    await newFood.save();
+    res
+      .status(201)
+      .json({ message: "Food item added successfully", data: newFood });
+  } catch (error) {
+    console.error("Error saving food:", error);
+    res
+      .status(500)
+      .json({ message: "Failed to add food item", error: error.message });
+  }
+};
+
+const listFood = async (req, res) => {
+  try {
+    const foods = await foodModel.find();
+    res.status(200).json({ success: true, data: foods });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Failed to fetch food items", error: error.message });
+  }
+};
+
+const removeFood = async (req, res) => {
+  const { id } = req.body;
+  try {
+    const food = await foodModel.findByIdAndDelete(id);
+     if(!food){
+        return res.status(404).json({ message: "Food item not found" });}
+    if (food && food.image) {
+      fs.unlink(`uploads/${food.image}`, (err) => {
+        if (err) {
+          console.error("Error deleting image:", err);
+        }
+      });
+    }
+    res.status(200).json({ success: true,
+      message: "Food item deleted successfully",
+       data: food });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Failed to delete food", error: error.message });
+  }
+};
+
+export { addFood, listFood, removeFood };
