@@ -15,7 +15,7 @@ const foodSchema= new mongoose.Schema({
     },
     countInStock:{
         type:Number,
-        required:true
+        // required:true
     },
     image:{
         type:String,

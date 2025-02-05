@@ -31,7 +31,7 @@ const listFood = async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Failed to fetch food items", error: error.message });
+      .json({success:false , message: "Failed to fetch food items", error: error.message });
   }
 };
 
