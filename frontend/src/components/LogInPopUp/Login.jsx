@@ -1,41 +1,102 @@
-import React, { useState } from 'react';
+import React, { createContext, useContext, useState } from "react";
 import "./Login.css";
+import { StoreContext } from "../../Context/storeContext";
+
 
 const Login = ({ showLogin, setShowLogin }) => {
-  const [currentState, setCurrentState] = useState('login');
-
+  const [currentState, setCurrentState] = useState("login");
+  const { url , token, setToken } = useContext(StoreContext);
   const toggleForm = () => {
-    setCurrentState(currentState === 'login' ? 'signup' : 'login');
+    setCurrentState(currentState === "login" ? "signup" : "login");
+  };
+
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+
+
+  const onChangeHandler = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    let newUrl = url;
+    if (currentState === "login") {
+      newUrl += "api/user/login";
+    } else {
+      newUrl += "api/user/register";
+    }
+
+    const response = await axios.post(newUrl, data);
+    if (response.data.status===200) {
+      setToken(response.data.token);
+      localStorage.setItem("token", response.data.token);
+      setShowLogin(false);
+    }
+    else{
+      alert(response.data.message);
+    }
   };
 
   return (
-    <div className={`login-popup ${showLogin ? 'show' : ''}`}>
+    <div className={`login-popup ${showLogin ? "show" : ""}`}>
       <div className="login-container">
-        <span className="close-btn" onClick={() => setShowLogin(false)}>&times;</span>
-        <h2>{currentState === 'login' ? 'Login' : 'Sign Up'}</h2>
-        <form>
-          {currentState === 'signup' && (
+        <span className="close-btn" onClick={() => setShowLogin(false)}>
+          &times;
+        </span>
+        <h2>{currentState === "login" ? "Login" : "Sign Up"}</h2>
+        <form onSubmit={submitHandler}>
+          {currentState === "signup" && (
             <div className="form-group">
               <label htmlFor="name">Name</label>
-              <input type="text" id="name" name="name" required />
+              <input
+                value={data.name}
+                onChange={onChangeHandler}
+                type="text"
+                id="name"
+                name="name"
+                required
+              />
             </div>
           )}
           <div className="form-group">
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" name="email" required />
+            <input
+              value={data.email}
+              onChange={onChangeHandler}
+              type="email"
+              id="email"
+              name="email"
+              required
+            />
           </div>
           <div className="form-group">
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" name="password" required />
+            <input
+              value={data.password}
+              onChange={onChangeHandler}
+              type="password"
+              id="password"
+              name="password"
+              required
+            />
           </div>
-          <button type="submit">{currentState === 'login' ? 'Login' : 'Sign Up'}</button>
+          <button type="submit">
+            {currentState === "login" ? "Login" : "Sign Up"}
+          </button>
         </form>
         <p onClick={toggleForm}>
-          {currentState === 'login' ? 'Don\'t have an account? Sign Up' : 'Already have an account? Login'}
+          {currentState === "login"
+            ? "Don't have an account? Sign Up"
+            : "Already have an account? Login"}
         </p>
       </div>
     </div>
-  );    
+  );
 };
 
 export default Login;
