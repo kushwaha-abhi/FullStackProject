@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useState } from "react";
+import React, {  useContext, useState, useEffect } from "react";
 import "./Login.css";
 import { StoreContext } from "../../Context/storeContext";
-
+import axios from "axios";
 
 const Login = ({ showLogin, setShowLogin }) => {
   const [currentState, setCurrentState] = useState("login");
@@ -22,23 +22,35 @@ const Login = ({ showLogin, setShowLogin }) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
+  //  useEffect(() => {console.log(data)},[data]);
+
   const submitHandler = async (e) => {
     e.preventDefault();
     let newUrl = url;
     if (currentState === "login") {
-      newUrl += "api/user/login";
-    } else {
-      newUrl += "api/user/register";
+      newUrl += "/api/user/login";
+    } 
+    if(currentState === "signup"){
+      newUrl += "/api/user/register";
     }
 
-    const response = await axios.post(newUrl, data);
-    if (response.data.status===200) {
-      setToken(response.data.token);
-      localStorage.setItem("token", response.data.token);
-      setShowLogin(false);
-    }
-    else{
-      alert(response.data.message);
+    try {
+      console.log(newUrl);
+      const response = await axios.post(newUrl, data, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      if (response.status === 200) {
+        setToken(response.data.token);
+        localStorage.setItem("token", response.data.token);
+        setShowLogin(false);
+      } else {
+        alert(response.data.message || "Something went wrong");
+      }
+    } catch (error) {
+      console.error("Error submitting data:", error);
+      alert(error.response?.data?.message || "An error occurred while sub99");
     }
   };
 
@@ -85,7 +97,7 @@ const Login = ({ showLogin, setShowLogin }) => {
               required
             />
           </div>
-          <button type="submit">
+          <button type="submit" >
             {currentState === "login" ? "Login" : "Sign Up"}
           </button>
         </form>
@@ -99,4 +111,4 @@ const Login = ({ showLogin, setShowLogin }) => {
   );
 };
 
-export default Login;
+export default Login; 
