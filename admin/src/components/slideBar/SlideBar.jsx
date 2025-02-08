@@ -11,11 +11,11 @@ const SlideBar = () => {
               <img src={assets.add_icon} alt="" />
               <p>Add Item</p>
           </NavLink>
-          <NavLink to ="/list"className="slidebar-option">
+          <NavLink to ="/orders"className="slidebar-option">
               <img src={assets.order_icon} alt="" />
               <p>Orders</p>
           </NavLink>
-          <NavLink to= "/orders" className="slidebar-option">
+          <NavLink to= "/list" className="slidebar-option">
               <img src={assets.order_icon} alt="" />
               <p>List Item</p>
           </NavLink>
