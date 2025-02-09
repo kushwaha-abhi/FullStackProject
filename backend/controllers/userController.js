@@ -13,7 +13,7 @@ const register = async (req, res)=>{
 try{
     const userExits= await  User.findOne({email});
    if(userExits){
-       res.status(400).json({message: "User already exists"});
+       return res.status(400).json({message: "User already exists"});
    }
    const salt= await bcrypt.genSalt(10);
    const hashedpassword= await bcrypt.hash(password, salt);
@@ -25,15 +25,16 @@ try{
 
    const token= await createToken(user._id);
 
-   res.status(200).json({
+   return res.status(200).json({
     success:true,
     user,
-    token
+    token,
+    message:"User created successfully"
    })
 
    }catch(error){
       console.error(error);
-      res.status(500).json({message: "Server Error"});
+      return res.status(500).json({message: "Server Error"});
    }
 }
 
@@ -46,7 +47,7 @@ const login= async(req,res)=>{
         const user= await User.findOne({email});
         console.log(user);
         if(!user){
-            res.status(404).json({message: "User not found"});
+           return res.status(404).json({message: "User not found"});
         }
         if (!user.password) {
             return res.status(500).json({ message: "User does not have a password set" });
@@ -55,17 +56,18 @@ const login= async(req,res)=>{
         const isMatch= await bcrypt.compare(password, user.password);
         console.log(isMatch);
         if(!isMatch){
-            res.status(400).json({message: "Invalid credentials"});
+           return res.status(400).json({message: "Invalid credentials"});
         }
         const token= await createToken(user._id);
-        res.status(200).json({
+        return res.status(200).json({
+            message:"Login success",
             success:true,
             token
         })
 
    }catch(error){
        console.error(error);
-       res.status(500).json({message: "Server Error"});
+       return res.status(500).json({message: "Server Error"});
    }
 
 }
