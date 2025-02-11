@@ -7,10 +7,9 @@ import foodRouter from "./routes/foodRoute.js";
 import userRouter from "./routes/userRoutes.js";
 import cartRouter from "./routes/cartRoutes.js";
 import path from "path";
-import {authMiddleware }from "./Milldleware/auth.js";
 dotenv.config();
 const app = express();
-
+app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(path.resolve("uploads")));
 app.use(cors());
 app.use(bodyParser.json());
@@ -25,4 +24,3 @@ app.listen(process.env.Port, (req, res) => {
   console.log(`server is running on port ${process.env.Port}`);
 });
 
-authMiddleware();
