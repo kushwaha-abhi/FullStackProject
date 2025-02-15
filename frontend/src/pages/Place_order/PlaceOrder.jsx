@@ -1,31 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StoreContext } from '../../Context/storeContext';
 import "./PlaceOrder.css";
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 const PlaceOrder = () => {
-  const { cartItems, food_list } = useContext(StoreContext);
-  const [address, setAddress] = useState({
-    name: '',
-    street: '',
-    city: '',
-    state: '',
-    zip: '',
-  });
-    const Navigate=useNavigate()
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setAddress({
-      ...address,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle order placement logic here
-    console.log('Order placed:', address);
-  };
-
+  const { cartItems, food_list,token, url } = useContext(StoreContext);
   const getItemDetails = (itemId) => {
     return food_list.find(item => item._id === itemId);
   };
@@ -40,6 +19,60 @@ const PlaceOrder = () => {
   const deliveryFee = 5.00; // Fixed delivery fee
   const subtotal = calculateSubtotal();
   const total = subtotal + deliveryFee;
+
+  // const total= calculateSubtotal()+5;
+  const [address, setAddress] = useState({
+    name: '',
+    street: '',
+    city: '',
+    state: '',
+    zip: '',
+  });
+
+   useEffect( ()=>{
+     console.log(address);
+   },[address])
+    const Navigate=useNavigate()
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setAddress({
+      ...address,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let orderItems= [];
+    food_list.map((item,index)=>{
+      if(cartItems[item._id]>0){
+        let itemInfo= item;
+        itemInfo["quantity"]=cartItems[item._id];
+        orderItems.push(itemInfo);
+      }
+    })
+    
+     let orderData= {
+
+      address:address,
+      items:orderItems,
+      amount:total,
+
+     }
+
+     let response= await axios.post(url+"/api/orders/order", orderData, {headers:{token}});
+     
+     if(response.data.success===true){
+        const {session_url}= response.data;
+        console.log(session_url);
+        window.location.replace(session_url);
+     }
+     else{
+      alert("error");
+     }
+  };
+
+  
 
   return (
     <div className="place-order-container">
@@ -108,7 +141,7 @@ const PlaceOrder = () => {
           <p>Subtotal: ${subtotal.toFixed(2)}</p>
           <p>Delivery Fee: ${deliveryFee.toFixed(2)}</p>
           <p>Total: ${total.toFixed(2)}</p>
-          <button  className="payment-button" onClick={handleSubmit }>Proceed to Payment</button>
+          <button type='submit' className="payment-button" onClick={handleSubmit }>Proceed to Payment</button>
         </div>
       </div>
     </div>

@@ -1,22 +1,21 @@
-import React, {  useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./Login.css";
 import { StoreContext } from "../../Context/storeContext";
 import axios from "axios";
 
+
 const Login = ({ showLogin, setShowLogin }) => {
   const [currentState, setCurrentState] = useState("login");
-  const { url , token, setToken } = useContext(StoreContext);
+  const { url, token, setToken } = useContext(StoreContext);
   const toggleForm = () => {
     setCurrentState(currentState === "login" ? "signup" : "login");
   };
 
   const [data, setData] = useState({
     name: "",
-    email: "",
+    email: "", 
     password: "",
   });
-
-
 
   const onChangeHandler = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -29,8 +28,8 @@ const Login = ({ showLogin, setShowLogin }) => {
     let newUrl = url;
     if (currentState === "login") {
       newUrl += "/api/user/login";
-    } 
-    if(currentState === "signup"){
+    }
+    if (currentState === "signup") {
       newUrl += "/api/user/register";
     }
 
@@ -38,19 +37,21 @@ const Login = ({ showLogin, setShowLogin }) => {
       console.log(newUrl);
       const response = await axios.post(newUrl, data, {
         headers: {
-          'Content-Type': 'application/json'
-        }
+          "Content-Type": "application/json",
+        },
       });
       if (response.status === 200) {
         setToken(response.data.token);
+        console.log(token);
         localStorage.setItem("token", response.data.token);
+        // axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         setShowLogin(false);
       } else {
         alert(response.data.message || "Something went wrong");
       }
     } catch (error) {
       console.error("Error submitting data:", error);
-      alert(error.response?.data?.message || "An error occurred while sub99");
+      alert(error.response?.data?.message || "An error occurred while submitting data");
     }
   };
 
@@ -97,7 +98,7 @@ const Login = ({ showLogin, setShowLogin }) => {
               required
             />
           </div>
-          <button type="submit" >
+          <button type="submit">
             {currentState === "login" ? "Login" : "Sign Up"}
           </button>
         </form>
@@ -111,4 +112,4 @@ const Login = ({ showLogin, setShowLogin }) => {
   );
 };
 
-export default Login; 
+export default Login;

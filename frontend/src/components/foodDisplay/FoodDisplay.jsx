@@ -15,7 +15,7 @@ const FoodDisplay = ({ category }) => {
                 key={index}
                 id={item._id}
                 description={item.description}
-                image={item.image}
+                image={`http://localhost:4000/uploads/${item.image}`}
                 name={item.name}
                 price={item.price}
                 category={item.category}
