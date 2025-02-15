@@ -6,6 +6,7 @@ import connectDB from "./config/db.js";
 import foodRouter from "./routes/foodRoute.js";
 import userRouter from "./routes/userRoutes.js";
 import cartRouter from "./routes/cartRoutes.js";
+import orderRouter from "./routes/orderRoutes.js";
 import path from "path";
 dotenv.config();
 const app = express();
@@ -19,7 +20,7 @@ connectDB();
 app.use("/api/foods", foodRouter);
 app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
-
+app.use("/api/orders",orderRouter);
 app.listen(process.env.Port, (req, res) => {
   console.log(`server is running on port ${process.env.Port}`);
 });
