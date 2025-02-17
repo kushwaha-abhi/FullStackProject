@@ -6,8 +6,11 @@ import Home from "./pages/Home/Home";
 import PlaceOrder from "./pages/Place_Order/PlaceOrder";
 import Footer from "./components/footer/Footer";
 import { useState } from "react";
-import Login from "./components/LogInPopUp/login";
-import Verify from "./pages/verify/Verify.jsx";
+import MyOrders from "./pages/MyOrders/MyOrders"
+import Login from "./components/LogInPopUp/Login"
+import Verify from "./pages/verify/Verify";
+import Search from "./components/Search/Search";
+
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
   return (
@@ -21,7 +24,10 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<PlaceOrder />} />
-          <Route path="/verify" element= {<Verify/>} />
+          <Route path="/verify" element={<Verify/>} />
+          <Route path="/myorders" element={<MyOrders/>} />
+          <Route path="/search" element={<Search/>} />
+          
         </Routes>
       </div>
       <Footer />

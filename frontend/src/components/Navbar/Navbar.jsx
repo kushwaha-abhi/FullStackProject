@@ -2,8 +2,10 @@ import React, { useContext, useState } from "react";
 import "./Navbar.css";
 import { assets } from "../../assets/frontend_assets/assets";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import { storeContext } from "../../Context/storeContext.jsx"
 const Navbar = ({ setShowLogin }) => {
+  const Navigate= useNavigate();
   const [menu, setMenu] = useState("home");
   // const {token} = useContext(storeContext);
   const token = localStorage.getItem("token");
@@ -46,7 +48,7 @@ const Navbar = ({ setShowLogin }) => {
         </a>
       </ul>
       <div className="navbarright">
-        <img src={assets.search_icon} alt="" />
+        <span onClick={()=>Navigate('/search')} ><img src={assets.search_icon} alt="" /></span>
         <div className="navbar-search-icon">
           <Link to="/cart">
             {" "}
@@ -66,7 +68,7 @@ const Navbar = ({ setShowLogin }) => {
           <div className="navbar-profile">
             <img src={assets.profile_icon} alt="" />
             <ul className="nav-profile-dropdown">
-              <li><img src={assets.bag_icon} alt="" /> <p>Orders</p></li>
+              <li onClick={()=>Navigate('/myorders')}><img src={assets.bag_icon} alt="" /> <p>Orders</p></li>
               <hr />
               <li onClick={logoOut} ><img src={assets.logout_icon} alt="" /> <p>LogOut</p></li>
               </ul>
