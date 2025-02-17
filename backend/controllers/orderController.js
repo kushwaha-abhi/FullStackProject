@@ -64,7 +64,7 @@ const verify = async (req,res) => {
   try {
     const { success, orderId } = req.body;
     if (success == "true") {
-      await orderModel.findByIdAndUpdate(orderId, { payment: true });
+      await orderModel.findByIdAndUpdate(orderId, { payment: true }, { new: true });
       return res.json({ success: true, message: "paid" });
     } else {
       await orderModel.findByIdAndDelete(orderId);
@@ -79,4 +79,20 @@ const verify = async (req,res) => {
   }
 };
 
-export { placeOrder, verify };
+const userOrders = async (req,res)=>{
+   const orders= await orderModel.find({userId:req.body.userId});
+   if(!orders){
+      res.status(400).json({
+        success:false,
+        message:"No Oders are available"
+      }) }
+
+      res.status(200).json({
+        success:true,
+        data:orders
+      })
+   
+}
+
+
+export { placeOrder, verify, userOrders };

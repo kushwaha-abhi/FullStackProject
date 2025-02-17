@@ -58,4 +58,27 @@ const removeFood = async (req, res) => {
   }
 };
 
-export { addFood, listFood, removeFood };
+const searchFoods= async (req, res)=>{
+   try {
+    const result = await foodModel.find({});
+    if(!result){
+      return res.status(400).json({
+        success:false,
+        message:"no Products are available",
+      })
+    }
+
+      res.status(200).json({
+        success:true,
+         data:result,
+      })
+   } catch (error) {
+     console.log(error);
+     return res.json({
+      success:'false'
+     })
+   }
+}
+
+
+export { addFood, listFood, removeFood , searchFoods};
