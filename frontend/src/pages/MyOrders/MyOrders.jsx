@@ -5,13 +5,13 @@ import { StoreContext } from "../../Context/storeContext";
 import axios from "axios";
 import { assets } from "../../assets/frontend_assets/assets";
 const MyOrders = () => {
-  const { token } = useContext(StoreContext);
+  const { token , url} = useContext(StoreContext);
 
   const [data, setData] = useState([]);
 
   const fetchData = async () => {
     const response = await axios.get(
-      "http://localhost:4000/api/orders/myorders",
+      `${url}/api/orders/myorders`,
       { headers: { token } }
     );
     console.log(response);

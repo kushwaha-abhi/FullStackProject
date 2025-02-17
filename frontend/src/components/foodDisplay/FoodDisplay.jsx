@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { StoreContext } from "../../Context/storeContext";
 import FoodItem from "../Fooditem/FoodItem";
 const FoodDisplay = ({ category }) => {
-  const { food_list } = useContext(StoreContext);
+  const { food_list , url} = useContext(StoreContext);
   return (
     <div className="food-display" id="food-display">
       <h2>Top dishes near You</h2>
@@ -15,7 +15,7 @@ const FoodDisplay = ({ category }) => {
                 key={index}
                 id={item._id}
                 description={item.description}
-                image={`http://localhost:4000/uploads/${item.image}`}
+                image={`${url}/uploads/${item.image}`}
                 name={item.name}
                 price={item.price}
                 category={item.category}

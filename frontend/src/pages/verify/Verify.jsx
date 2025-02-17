@@ -10,9 +10,9 @@ const Verify = () => {
   const success = searchParams.get("success");
   const orderId = searchParams.get("orderId");
   console.log(success + orderId);
-  // const { url } = useContext(StoreContext);
+   const {url}= useContext(StoreContext)
     const verifyPayment=  async ()=>{
-       const response = await axios.post("http://localhost:4000/api/orders/verify",{success,orderId});
+       const response = await axios.post(`${url}/api/orders/verify`,{success,orderId});
 
        console.log(" response is " + response.data);
        

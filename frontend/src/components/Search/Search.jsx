@@ -1,17 +1,18 @@
 import axios from 'axios';
 import './Search.css';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { StoreContext } from '../../Context/storeContext';
 
 const Search = () => {
     const Navigate= useNavigate();
     const [data, setData] = useState([]);
     const [query, setQuery] = useState('');
     const [filteredData, setFilteredData] = useState([]);
-
+     const {url}= useContext(StoreContext)
     const fetchData = async () => {
         try {
-            const result = await axios.get('http://localhost:4000/api/foods/search');
+            const result = await axios.get(`${url}/api/foods/search`);
             setData(result.data.data);
             setFilteredData(result.data.data);
         } catch (error) {

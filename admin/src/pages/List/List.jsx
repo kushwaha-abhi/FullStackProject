@@ -28,6 +28,8 @@ const List = () => {
     }
   }
 
+  console.log(list)
+
   return (
     <div className="list add flex-col">
       <p>All Foods List</p>
@@ -42,7 +44,7 @@ const List = () => {
         {list.map((item,index)=>{
           return(
             <div key={index} className="list-table-format">
-              <img src={item.image} alt="" />
+              <img src={`http://localhost:4000/uploads/${item.image}`} alt="" />
               <p>{item.name}</p>
               <p>{item.price}</p>
               <p>{item.category}</p>

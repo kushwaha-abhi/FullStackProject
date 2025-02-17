@@ -85,12 +85,13 @@ const Add = () => {
             <p>Product Category</p>
             <select onChange={onChangeHandeler} name="category" id="">
               <option value="salad">Salad</option>
-              <option value="rolls">Rols</option>
+              <option value="rolls">Rolls</option>
               <option value="desert">Desert</option>
               <option value="sandwich">Sandwich</option>
               <option value="cake">Cake</option>
               <option value="Pure veg">Pure Veg</option>
               <option value="noodles">Noodles</option>
+              <option value="pasta">Pasta</option>
             </select>
           </div>
           <div className="add-price">
