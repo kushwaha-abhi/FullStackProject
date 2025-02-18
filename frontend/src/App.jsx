@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar/Navbar";
 import { Routes, Route } from "react-router-dom";
 import Cart from "./pages/Cart/Cart";
 import Home from "./pages/Home/Home";
-import PlaceOrder from "./pages/Place_Order/PlaceOrder";
+import PlaceOrder from "./pages/Place_order/PlaceOrder.jsx";
 import Footer from "./components/footer/Footer";
 import { useState } from "react";
 import MyOrders from "./pages/MyOrders/MyOrders"
