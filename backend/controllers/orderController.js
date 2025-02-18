@@ -4,6 +4,8 @@ import Stripe from "stripe";
 import dotenv from "dotenv";
 
 dotenv.config();
+const FRONTEND_URL= "https://foodweb-4pf4.onrender.com"
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 console.log("stripe key " + process.env.STRIPE_SECRET_KEY);
 const placeOrder = async (req, res) => {
@@ -40,8 +42,8 @@ const placeOrder = async (req, res) => {
     const session = await stripe.checkout.sessions.create({
       line_items,
       mode: "payment",
-      success_url: `${process.env.FRONTEND_URL}/verify?success=true&orderId=${newOrder._id}`,
-      cancel_url: `${process.env.FRONTEND_URL}/verify?success=false&orderId=${newOrder._id}`,
+      success_url: `${FRONTEND_URL}/verify?success=true&orderId=${newOrder._id}`,
+      cancel_url: `${FRONTEND_URL}/verify?success=false&orderId=${newOrder._id}`,
     });
 
     res.status(201).json({
