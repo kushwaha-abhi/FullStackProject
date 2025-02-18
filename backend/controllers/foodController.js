@@ -1,5 +1,5 @@
 import fs from "fs";
-import foodModel from "../models/foodModel.js"; // Ensure the correct file path
+import foodModel from "../Models/foodModel.js"
 
 const addFood = async (req, res) => {
   const { name, description, price, countInStock , category} = req.body;
