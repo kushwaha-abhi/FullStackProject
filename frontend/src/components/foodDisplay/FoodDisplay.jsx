@@ -2,8 +2,13 @@ import "./FoodDisplay.css";
 import { useContext } from "react";
 import { StoreContext } from "../../Context/storeContext";
 import FoodItem from "../Fooditem/FoodItem";
+import Spinner from "../Spinner/Spinner";
 const FoodDisplay = ({ category }) => {
   const { food_list , url} = useContext(StoreContext);
+
+  if (!food_list || food_list.length === 0) {
+    return <Spinner />;
+  }
   return (
     <div className="food-display" id="food-display">
       <h2>Top dishes near You</h2>
