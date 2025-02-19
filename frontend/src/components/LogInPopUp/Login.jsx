@@ -41,13 +41,15 @@ const Login = ({ showLogin, setShowLogin }) => {
         },
       });
       if (response.status === 200) {
+         toast.success(response.data.message);
         setToken(response.data.token);
         console.log(token);
         localStorage.setItem("token", response.data.token);
         // axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         setShowLogin(false);
       } else {
-        alert(response.data.message || "Something went wrong");
+         toast.error(response.data.message);
+        // alert(response.data.message || "Something went wrong");
       }
     } catch (error) {
       console.error("Error submitting data:", error);

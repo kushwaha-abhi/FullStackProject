@@ -10,6 +10,7 @@ import MyOrders from "./pages/MyOrders/MyOrders"
 import Login from "./components/LogInPopUp/Login"
 import Verify from "./pages/verify/Verify";
 import Search from "./components/Search/Search";
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -19,6 +20,7 @@ const App = () => {
         <Login setShowLogin={setShowLogin} showLogin={showLogin} />
       ) : null}
       <div className="app">
+      <ToastContainer />
         <Navbar setShowLogin={setShowLogin} />
         <Routes>
           <Route path="/" element={<Home />} />
