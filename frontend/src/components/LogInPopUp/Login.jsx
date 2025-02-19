@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import "./Login.css";
 import { StoreContext } from "../../Context/storeContext";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 
 const Login = ({ showLogin, setShowLogin }) => {
