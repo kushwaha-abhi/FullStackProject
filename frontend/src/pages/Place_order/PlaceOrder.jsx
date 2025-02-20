@@ -3,6 +3,7 @@ import { StoreContext } from '../../Context/storeContext';
 import "./PlaceOrder.css";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import {toast} from 'react-toastify'
 const PlaceOrder = () => {
   const { cartItems, food_list,token, url } = useContext(StoreContext);
   const getItemDetails = (itemId) => {
@@ -68,7 +69,7 @@ const PlaceOrder = () => {
         window.location.replace(session_url);
      }
      else{
-      alert("error");
+         toast.message('Please login first');
      }
   };
 
