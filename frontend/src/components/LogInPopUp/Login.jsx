@@ -4,7 +4,6 @@ import { StoreContext } from "../../Context/storeContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-
 const Login = ({ showLogin, setShowLogin }) => {
   const [currentState, setCurrentState] = useState("login");
   const { url, token, setToken } = useContext(StoreContext);
@@ -14,7 +13,7 @@ const Login = ({ showLogin, setShowLogin }) => {
 
   const [data, setData] = useState({
     name: "",
-    email: "", 
+    email: "",
     password: "",
   });
 
@@ -42,19 +41,22 @@ const Login = ({ showLogin, setShowLogin }) => {
         },
       });
       if (response.status === 200) {
-         toast.success(response.data.message);
+        toast.success(response.data.message);
         setToken(response.data.token);
         console.log(token);
         localStorage.setItem("token", response.data.token);
         // axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         setShowLogin(false);
       } else {
-         toast.error(response.data.message);
+        toast.error(response.data.message);
         // alert(response.data.message || "Something went wrong");
       }
     } catch (error) {
       console.error("Error submitting data:", error);
-      alert(error.response?.data?.message || "An error occurred while submitting data");
+      alert(
+        error.response?.data?.message ||
+          "An error occurred while submitting data"
+      );
     }
   };
 
