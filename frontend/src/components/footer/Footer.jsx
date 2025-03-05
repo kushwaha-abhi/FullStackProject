@@ -14,9 +14,10 @@ const Footer = () => {
             
           </p>
           <div className="footer-social-icons">
-            <img src={assets.facebook_icon} alt="" />
-            <img src={assets.twitter_icon} alt="" />
-            <img src={assets.linkedin_icon} alt="" />
+            {/* <img src={assets.facebook_icon} alt="" /> */}
+            
+            <a href="https://x.com/Abhi_kushwaha_?s=09"> <img src={assets.twitter_icon} alt="" /></a>
+             <a href="https://www.linkedin.com/in/abhishek-kushwaha-0a90ba286/"><img src={assets.linkedin_icon} alt="" /></a>
           </div>
         </div>
 
@@ -33,7 +34,7 @@ const Footer = () => {
             <h2>Get in Touch</h2>
             <ul>
                 <li>+91 9450-111-888</li>
-                <li>tomato@gmail.com</li>
+                <li>kushwahaabhi50888.com</li>
             </ul>
         </div>
       </div>
